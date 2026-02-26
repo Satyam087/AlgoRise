@@ -56,6 +56,10 @@
     border-radius: 12px;
     transition: color var(--t-fast);
     z-index: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .auth-tab.active {
@@ -146,6 +150,9 @@
     color: var(--txt-muted);
     transition: color var(--t-fast);
     display: flex;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .toggle-pw:hover {

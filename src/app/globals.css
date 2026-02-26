@@ -1,61 +1,40 @@
 /* ================================================================
-   AskMyNotes – styles.css
+   AskMyNotes – globals.css  (Next.js)
    Design System: Purple/Pink gradient, Glassmorphism, Dark-first
    ================================================================ */
-
-/* ── Google Fonts already imported in <head> ─────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ── 1. CSS Custom Properties ────────────────────────────────── */
 :root {
-  /* Brand */
   --clr-purple: #7C3AED;
   --clr-purple-2: #9B59F5;
   --clr-pink: #F472B6;
   --clr-yellow: #FBBF24;
-
-  /* Gradient */
   --grad-main: linear-gradient(135deg, var(--clr-purple), var(--clr-pink));
   --grad-text: linear-gradient(90deg, #A78BFA, #F472B6);
-
-  /* Background */
   --bg-page: #08050F;
   --bg-surface: #12091E;
   --bg-card: rgba(255, 255, 255, 0.035);
   --bg-card-h: rgba(255, 255, 255, 0.065);
-
-  /* Text */
   --txt-primary: #F1EEF9;
   --txt-secondary: #9B91BB;
   --txt-muted: #5C5280;
-
-  /* Border */
   --border-subtle: rgba(255, 255, 255, 0.07);
   --border-glow: rgba(124, 58, 237, 0.35);
-
-  /* Shadows */
   --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.45);
   --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.25);
-
-  /* Radius */
   --r-sm: 8px;
   --r-md: 16px;
   --r-lg: 24px;
   --r-xl: 32px;
-
-  /* Spacing */
   --section-py: 120px;
-
-  /* Font */
   --font-sans: 'Outfit', 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-
-  /* Transition */
   --t-fast: 150ms ease;
   --t-base: 250ms ease;
   --t-slow: 450ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Light mode overrides */
 body.light-mode {
   --bg-page: #F8F5FF;
   --bg-surface: #EEE8FF;
@@ -178,7 +157,6 @@ body.light-mode #navbar.scrolled {
   height: 72px;
 }
 
-/* Logo */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -198,7 +176,6 @@ body.light-mode #navbar.scrolled {
   background-clip: text;
 }
 
-/* Nav links */
 .nav-links {
   display: flex;
   gap: 4px;
@@ -220,14 +197,12 @@ body.light-mode #navbar.scrolled {
   background: rgba(255, 255, 255, 0.06);
 }
 
-/* Nav actions */
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Dark toggle */
 .dark-toggle {
   width: 36px;
   height: 36px;
@@ -258,7 +233,6 @@ body.light-mode .moon-icon {
   display: none;
 }
 
-/* Mobile menu button */
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
@@ -275,7 +249,6 @@ body.light-mode .moon-icon {
   transition: transform var(--t-base), opacity var(--t-base);
 }
 
-/* Mobile menu */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -328,7 +301,6 @@ body.light-mode .moon-icon {
 .btn-primary.btn-large {
   padding: 14px 32px;
   font-size: 1rem;
-  border-radius: var(--r-md);
 }
 
 .nav-cta {
@@ -450,6 +422,17 @@ body.light-mode .moon-icon {
   transform: translate(0) !important;
 }
 
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ── 11. Hero Section ────────────────────────────────────────── */
 .hero-section {
   min-height: 100vh;
@@ -460,7 +443,6 @@ body.light-mode .moon-icon {
   padding-top: 72px;
 }
 
-/* Background orbs */
 .hero-gradient-orb {
   position: absolute;
   border-radius: 50%;
@@ -492,14 +474,12 @@ body.light-mode .moon-icon {
   left: 50%;
 }
 
-/* Hero particles canvas */
 .hero-particles {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-/* Hero inner */
 .hero-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -509,7 +489,6 @@ body.light-mode .moon-icon {
   padding-bottom: 80px;
 }
 
-/* Hero badge */
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -546,7 +525,6 @@ body.light-mode .moon-icon {
   }
 }
 
-/* Hero headline */
 .hero-headline {
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 900;
@@ -555,7 +533,6 @@ body.light-mode .moon-icon {
   letter-spacing: -0.02em;
 }
 
-/* Hero subtext */
 .hero-sub {
   font-size: 1.1rem;
   color: var(--txt-secondary);
@@ -564,7 +541,6 @@ body.light-mode .moon-icon {
   line-height: 1.7;
 }
 
-/* Hero CTAs */
 .hero-ctas {
   display: flex;
   gap: 16px;
@@ -572,7 +548,6 @@ body.light-mode .moon-icon {
   margin-bottom: 24px;
 }
 
-/* Hero tagline */
 .hero-tagline {
   font-size: 0.875rem;
   color: var(--txt-muted);
@@ -580,7 +555,6 @@ body.light-mode .moon-icon {
   margin-bottom: 32px;
 }
 
-/* Hero stats */
 .hero-stats {
   display: flex;
   align-items: center;
@@ -616,19 +590,6 @@ body.light-mode .moon-icon {
   background: var(--border-subtle);
 }
 
-/* Fade-up animation (triggered by JS) */
-.fade-up {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-up.in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Hero visual */
 .hero-visual {
   display: flex;
   align-items: center;
@@ -642,7 +603,6 @@ body.light-mode .moon-icon {
   max-width: 440px;
 }
 
-/* Animated SVG Notebook */
 .notebook-svg {
   width: 100%;
   filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.45));
@@ -683,7 +643,6 @@ body.light-mode .moon-icon {
   transition: rx 0.1s linear;
 }
 
-/* Floating cards */
 .floating-card {
   position: absolute;
   display: flex;
@@ -759,7 +718,6 @@ body.light-mode .floating-card {
   }
 }
 
-/* Scroll indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 32px;
@@ -861,7 +819,6 @@ body.light-mode .floating-card {
 }
 
 /* ── 13. Solution Section ────────────────────────────────────── */
-
 .steps-container {
   display: flex;
   align-items: flex-start;
@@ -875,7 +832,6 @@ body.light-mode .floating-card {
   border: 1px solid var(--border-subtle);
   border-radius: var(--r-lg);
   transition: background var(--t-base), border-color var(--t-base), transform var(--t-slow);
-  transition-delay: var(--delay, 0s);
 }
 
 .step:hover {
@@ -951,7 +907,6 @@ body.light-mode .floating-card {
   box-shadow: var(--shadow-card);
 }
 
-/* Subjects sidebar */
 .chat-subjects {
   background: rgba(255, 255, 255, 0.03);
   border-right: 1px solid var(--border-subtle);
@@ -1042,7 +997,6 @@ body.light-mode .floating-card {
   text-overflow: ellipsis;
 }
 
-/* Chat window */
 .chat-window {
   display: flex;
   flex-direction: column;
@@ -1089,7 +1043,6 @@ body.light-mode .floating-card {
   scrollbar-color: var(--border-subtle) transparent;
 }
 
-/* Messages */
 .chat-message-group {
   display: flex;
   flex-direction: column;
@@ -1212,7 +1165,8 @@ body.light-mode .floating-card {
   flex: 1;
 }
 
-.chat-input-bar {
+.chat-input-bar,
+.modal-input-bar {
   display: flex;
   gap: 10px;
   padding: 14px 20px;
@@ -1260,8 +1214,7 @@ body.light-mode .floating-card {
   transform: scale(1.05);
 }
 
-/* ── 15. Study Mode Section ──────────────────────────────────── */
-
+/* ── 15. Study Mode ──────────────────────────────────────────── */
 .study-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1335,8 +1288,6 @@ body.light-mode .floating-card {
   color: #F87171;
 }
 
-
-
 .option-letter {
   display: flex;
   align-items: center;
@@ -1406,7 +1357,6 @@ body.light-mode .floating-card {
   margin-top: 12px;
 }
 
-/* Short answer */
 .sa-item {
   margin-bottom: 20px;
   padding-bottom: 20px;
@@ -1433,7 +1383,7 @@ body.light-mode .floating-card {
   gap: 6px;
 }
 
-/* ── 16. Why Different Section ───────────────────────────────── */
+/* ── 16. Why Different ───────────────────────────────────────── */
 .section-why {
   background: var(--bg-surface);
 }
@@ -1465,8 +1415,7 @@ body.light-mode .floating-card {
   line-height: 1.65;
 }
 
-/* ── 17. Tech Architecture Section ──────────────────────────── */
-
+/* ── 17. Tech Architecture ───────────────────────────────────── */
 .arch-pipeline {
   display: flex;
   align-items: center;
@@ -1488,7 +1437,6 @@ body.light-mode .floating-card {
   min-width: 100px;
   text-align: center;
   transition: border-color var(--t-base), background var(--t-base), transform var(--t-slow);
-  transition-delay: var(--delay, 0s);
 }
 
 .arch-block:hover {
@@ -1520,7 +1468,6 @@ body.light-mode .floating-card {
 .arch-arrow {
   font-size: 1.2rem;
   color: var(--txt-muted);
-  transition-delay: var(--delay, 0s);
 }
 
 .tech-stack-row {
@@ -1547,7 +1494,7 @@ body.light-mode .floating-card {
   color: var(--clr-purple-2);
 }
 
-/* ── 18. Roadmap Section ─────────────────────────────────────── */
+/* ── 18. Roadmap ─────────────────────────────────────────────── */
 .section-roadmap {
   background: var(--bg-surface);
 }
@@ -1963,14 +1910,6 @@ body.light-mode .modal-box {
   border-color: rgba(124, 58, 237, 0.5);
 }
 
-.modal-input-bar {
-  display: flex;
-  gap: 10px;
-  padding: 14px 20px;
-  border-top: 1px solid var(--border-subtle);
-}
-
-/* Typing indicator */
 .typing-indicator {
   display: flex;
   gap: 4px;
@@ -2010,7 +1949,6 @@ body.light-mode .modal-box {
   }
 }
 
-/* ── 22. Cursor Caret ────────────────────────────────────────── */
 .typewriter-caret {
   display: inline-block;
   width: 2px;
@@ -2033,7 +1971,7 @@ body.light-mode .modal-box {
   }
 }
 
-/* ── 23. Responsive ──────────────────────────────────────────── */
+/* ── 22. Responsive ──────────────────────────────────────────── */
 @media (max-width: 1024px) {
   :root {
     --section-py: 80px;
@@ -2117,6 +2055,10 @@ body.light-mode .modal-box {
   }
 
   .nav-actions .btn-primary {
+    display: none;
+  }
+
+  .nav-auth-btn {
     display: none;
   }
 
