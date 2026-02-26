@@ -2,7 +2,7 @@
    AskMyNotes – globals.css  (Next.js)
    Design System: Purple/Pink gradient, Glassmorphism, Dark-first
    ================================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesk:opsz,wght@12..96,200..800&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ── 1. CSS Custom Properties ────────────────────────────────── */
 :root {
@@ -28,7 +28,7 @@
   --r-lg: 24px;
   --r-xl: 32px;
   --section-py: 120px;
-  --font-sans: 'Outfit', 'Inter', sans-serif;
+  --font-sans: 'Bricolage Grotesk', 'Outfit', 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --t-fast: 150ms ease;
   --t-base: 250ms ease;
@@ -90,6 +90,15 @@ button {
 
 input {
   font-family: inherit;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--bg-surface) inset !important;
+  -webkit-text-fill-color: var(--txt-primary) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 ul {
