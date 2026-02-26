@@ -107,6 +107,7 @@ export default function Navbar() {
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
                     </button>
+                    <Link href="/dashboard" className="btn-ghost nav-auth-btn text-[#7C3AED]">Dashboard (Temp)</Link>
                     <Link href="/auth" className="btn-ghost nav-auth-btn">Sign In</Link>
                     <Link href="/auth#signup" className="btn-primary nav-cta">Sign Up</Link>
                 </div>
