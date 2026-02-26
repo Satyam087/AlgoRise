@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AskMyNotes – Subject-Scoped Study Copilot</title>
+  <meta name="description"
+    content="Ask questions. Get answers grounded in your own notes. AskMyNotes is the AI study copilot that eliminates hallucinations with subject-scoped, cited responses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Sticky Navbar -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="8" fill="url(#logoGrad)" />
+            <path d="M7 9h14M7 14h10M7 19h12" stroke="white" stroke-width="2" stroke-linecap="round" />
+            <circle cx="21" cy="19" r="3" fill="#FBBF24" />
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28">
+                <stop offset="0%" stop-color="#7C3AED" />
+                <stop offset="100%" stop-color="#F472B6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">AskMyNotes</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link active" data-section="hero">Home</a></li>
+        <li><a href="#problem" class="nav-link" data-section="problem">Problem</a></li>
+        <li><a href="#solution" class="nav-link" data-section="solution">Solution</a></li>
+        <li><a href="#chat-preview" class="nav-link" data-section="chat-preview">Preview</a></li>
+        <li><a href="#why-different" class="nav-link" data-section="why-different">Why Us</a></li>
+        <li><a href="#roadmap" class="nav-link" data-section="roadmap">Roadmap</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <a href="auth.html" class="btn-ghost nav-auth-btn">Sign In</a>
+        <a href="auth.html#signup" class="btn-primary nav-cta">Sign Up</a>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#hero" class="mobile-link">Home</a>
+      <a href="#problem" class="mobile-link">Problem</a>
+      <a href="#solution" class="mobile-link">Solution</a>
+      <a href="#chat-preview" class="mobile-link">Preview</a>
+      <a href="#why-different" class="mobile-link">Why Us</a>
+      <a href="#roadmap" class="mobile-link">Roadmap</a>
+      <a href="auth.html" class="mobile-link">Sign In</a>
+      <a href="auth.html#signup" class="btn-primary" style="text-align:center">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero-section">
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-gradient-orb orb-1"></div>
+    <div class="hero-gradient-orb orb-2"></div>
+    <div class="hero-gradient-orb orb-3"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge fade-up">
+          <span class="badge-dot"></span>
+          Subject-Scoped AI for Students
+        </div>
+        <h1 class="hero-headline fade-up" id="heroHeadline">
+          Your Study Buddy,<br /><span class="gradient-text">Powered by AI</span>
+        </h1>
+        <p class="hero-sub fade-up">
+          Ask questions. Get answers grounded in your own notes.
+          <br />No hallucinations. No guessing. Only <strong>your knowledge</strong>.
+        </p>
+        <div class="hero-ctas fade-up">
+          <a href="auth.html" class="btn-primary btn-large">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Start Studying Smart
+          </a>
+          <a href="#solution" class="btn-ghost btn-large">
+            See How It Works
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </a>
+        </div>
+        <p class="hero-tagline fade-up">"Built for students who want answers, not assumptions."</p>
+        <div class="hero-stats fade-up">
+          <div class="stat"><span class="stat-num">3</span><span class="stat-label">Subject Scopes</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Cited Answers</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-num">0</span><span class="stat-label">Hallucinations</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="notebook-container" id="notebookContainer">
+          <!-- Animated SVG Notebook -->
+          <svg class="notebook-svg" id="notebookSvg" viewBox="0 0 400 320" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- Book shadow -->
+            <ellipse cx="200" cy="305" rx="160" ry="10" fill="rgba(0,0,0,0.15)" class="nb-shadow" />
+            <!-- Spine -->
+            <rect x="190" y="30" width="20" height="250" rx="2" fill="#5B21B6" class="nb-spine" />
+            <!-- Left cover (back) -->
+            <g class="nb-cover-left" id="nbCoverLeft">
+              <rect x="30" y="30" width="170" height="250" rx="8" fill="#7C3AED" />
+              <rect x="38" y="38" width="154" height="234" rx="4" fill="#6D28D9" opacity="0.6" />
+              <!-- Lines on left page -->
+              <line x1="55" y1="80" x2="165" y2="80" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="55" y1="100" x2="145" y2="100" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="55" y1="120" x2="158" y2="120" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="55" y1="140" x2="135" y2="140" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="55" y1="160" x2="155" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="55" y1="180" x2="140" y2="180" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <text x="55" y="65" fill="rgba(255,255,255,0.5)" font-family="Outfit" font-size="14"
+                font-weight="600">Physics Notes</text>
+            </g>
+            <!-- Right cover (front) -->
+            <g class="nb-cover-right" id="nbCoverRight">
+              <rect x="200" y="30" width="170" height="250" rx="8" fill="#8B5CF6" />
+              <rect x="208" y="38" width="154" height="234" rx="4" fill="#7C3AED" opacity="0.6" />
+              <!-- Lines on right page -->
+              <line x1="225" y1="80" x2="345" y2="80" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="225" y1="100" x2="330" y2="100" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="225" y1="120" x2="340" y2="120" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="225" y1="140" x2="310" y2="140" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="225" y1="160" x2="338" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <line x1="225" y1="180" x2="325" y2="180" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+              <text x="225" y="65" fill="rgba(255,255,255,0.5)" font-family="Outfit" font-size="14"
+                font-weight="600">Chapter 3 · Forces</text>
+              <!-- Bookmark -->
+              <polygon points="340,30 360,30 360,70 350,60 340,70" fill="#FBBF24" />
+            </g>
+            <!-- Pen -->
+            <g class="nb-pen" id="nbPen">
+              <line x1="310" y1="200" x2="370" y2="80" stroke="#F472B6" stroke-width="5" stroke-linecap="round" />
+              <line x1="370" y1="80" x2="375" y2="70" stroke="#1A0A3C" stroke-width="4" stroke-linecap="round" />
+              <circle cx="310" cy="200" r="2" fill="#F472B6" />
+            </g>
+          </svg>
+          <div class="floating-card card-1">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+              <path d="M9 12l2 2 4-4" />
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            <span>Cited answer found!</span>
+          </div>
+          <div class="floating-card card-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FBBF24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <span>High Confidence</span>
+          </div>
+          <div class="floating-card card-3">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+            <span>Physics_notes.pdf · P.12</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-dot"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 1: THE PROBLEM
+  ══════════════════════════════════════════════════════ -->
+  <section id="problem" class="section section-problem">
+    <div class="container">
+      <div class="section-tag reveal">The Problem</div>
+      <h2 class="section-title reveal">Students Deserve AI<br /><span class="gradient-text">They Can Trust</span></h2>
+      <p class="section-sub reveal">Current AI tools fail students in three critical ways:</p>
+
+      <div class="problem-cards">
+        <div class="glass-card problem-card reveal-card">
+          <div class="card-icon icon-red">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+          </div>
+          <h3>AI Hallucinates</h3>
+          <p>Generic AI tools confidently give wrong answers, citing sources that don't exist. Students trust them
+            anyway — and fail exams.</p>
+          <div class="card-stat">68% of students report wrong AI answers</div>
+        </div>
+
+        <div class="glass-card problem-card reveal-card" style="--delay: 0.1s">
+          <div class="card-icon icon-orange">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <circle cx="12" cy="17" r="1" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+            </svg>
+          </div>
+          <h3>No Subject Isolation</h3>
+          <p>Ask a Chemistry question and get a Physics answer. Without subject boundaries, AI mixes knowledge
+            indiscriminately.</p>
+          <div class="card-stat">Every subject bleeds into another</div>
+        </div>
+
+        <div class="glass-card problem-card reveal-card" style="--delay: 0.2s">
+          <div class="card-icon icon-yellow">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
+          <h3>No Transparency</h3>
+          <p>Zero citations. Zero confidence scores. Zero evidence. You never know where the answer came from or how
+            reliable it is.</p>
+          <div class="card-stat">0 citations from standard AI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 2: THE SOLUTION
+  ══════════════════════════════════════════════════════ -->
+  <section id="solution" class="section section-solution">
+    <div class="container">
+      <div class="section-tag reveal">The Solution</div>
+      <h2 class="section-title reveal">Introducing <span class="gradient-text">AskMyNotes</span></h2>
+      <p class="section-sub reveal">Three simple steps to exam-ready, grounded AI answers</p>
+
+      <div class="steps-container">
+        <div class="step reveal-card">
+          <div class="step-number">01</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="url(#stepGrad1)" stroke-width="2">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              <defs>
+                <linearGradient id="stepGrad1" x1="0" y1="0" x2="24" y2="24">
+                  <stop stop-color="#7C3AED" />
+                  <stop offset="1" stop-color="#F472B6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3>Create 3 Subjects</h3>
+          <p>Set up Physics, Chemistry, Math — or any subjects you're studying. Each gets its own isolated knowledge
+            scope.</p>
+          <div class="step-chip">Physics · Chemistry · Math</div>
+        </div>
+
+        <div class="step-arrow reveal-card" style="--delay: 0.05s">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#arrowGrad)" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+            <defs>
+              <linearGradient id="arrowGrad" x1="0" y1="0" x2="24" y2="0">
+                <stop stop-color="#7C3AED" />
+                <stop offset="1" stop-color="#F472B6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="step reveal-card" style="--delay: 0.1s">
+          <div class="step-number">02</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="url(#stepGrad2)" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+              <defs>
+                <linearGradient id="stepGrad2" x1="0" y1="0" x2="24" y2="24">
+                  <stop stop-color="#7C3AED" />
+                  <stop offset="1" stop-color="#F472B6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3>Upload Your Notes</h3>
+          <p>Drop in PDF, TXT, or DOCX files. We chunk, embed, and store them in a vector database per subject.</p>
+          <div class="step-chip">PDF · TXT · DOCX</div>
+        </div>
+
+        <div class="step-arrow reveal-card" style="--delay: 0.15s">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#arrowGrad2)" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+            <defs>
+              <linearGradient id="arrowGrad2" x1="0" y1="0" x2="24" y2="0">
+                <stop stop-color="#7C3AED" />
+                <stop offset="1" stop-color="#F472B6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="step reveal-card" style="--delay: 0.2s">
+          <div class="step-number">03</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="url(#stepGrad3)" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              <defs>
+                <linearGradient id="stepGrad3" x1="0" y1="0" x2="24" y2="24">
+                  <stop stop-color="#7C3AED" />
+                  <stop offset="1" stop-color="#F472B6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3>Ask — Get Cited Answers</h3>
+          <p>Ask any question. Get grounded answers with page citations, confidence scores, and supporting snippets —
+            only from your notes.</p>
+          <div class="step-chip">Cited · Grounded · Trusted</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 3: CHAT PREVIEW
+  ══════════════════════════════════════════════════════ -->
+  <section id="chat-preview" class="section section-chat">
+    <div class="container">
+      <div class="section-tag reveal">Live Preview</div>
+      <h2 class="section-title reveal">Subject-Scoped <span class="gradient-text">Chat Preview</span></h2>
+      <p class="section-sub reveal">See how AskMyNotes answers with full citation transparency</p>
+
+      <div class="chat-demo reveal-card">
+        <div class="chat-subjects">
+          <div class="subject-label">Your Subjects</div>
+          <button class="subject-btn active" data-subject="physics" onclick="selectSubject(this, 'physics')">
+            <div class="subject-color physics-color"></div>Physics
+          </button>
+          <button class="subject-btn" data-subject="chemistry" onclick="selectSubject(this, 'chemistry')">
+            <div class="subject-color chemistry-color"></div>Chemistry
+          </button>
+          <button class="subject-btn" data-subject="math" onclick="selectSubject(this, 'math')">
+            <div class="subject-color math-color"></div>Math
+          </button>
+          <div class="subject-divider"></div>
+          <div class="subject-files-label">Uploaded Files</div>
+          <div class="subject-file" id="subjectFileShow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            <span id="fileNameShow">Physics_notes.pdf</span>
+          </div>
+          <div class="subject-file">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            <span id="fileNameShow2">Mechanics_ch1.pdf</span>
+          </div>
+        </div>
+
+        <div class="chat-window">
+          <div class="chat-header">
+            <div class="chat-header-dot"></div>
+            <span id="chatHeaderTitle">Physics · AskMyNotes AI</span>
+            <div class="chat-header-badge">🔒 Scoped</div>
+          </div>
+
+          <div class="chat-messages" id="chatMessages">
+            <!-- Physics messages -->
+            <div class="chat-message-group physics-msgs">
+              <div class="msg user-msg">
+                <div class="msg-bubble">What is Newton's Third Law?</div>
+              </div>
+              <div class="msg ai-msg">
+                <div class="msg-avatar">AI</div>
+                <div class="msg-content">
+                  <div class="msg-bubble ai-bubble">
+                    Newton's Third Law states that for every action, there is an equal and opposite reaction. When
+                    object A exerts a force on object B, object B simultaneously exerts a force equal in magnitude but
+                    opposite in direction on object A. This law is fundamental to understanding momentum conservation.
+                    <div class="msg-citation">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      </svg>
+                      Physics_notes.pdf – Page 12
+                    </div>
+                    <div class="msg-confidence high">
+                      <div class="confidence-dot"></div>
+                      Confidence: High
+                    </div>
+                    <div class="msg-snippet">
+                      "...every action has an equal and <mark>opposite reaction</mark> — Newton's Third Law..."
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="msg user-msg">
+                <div class="msg-bubble">Give me an example with rockets.</div>
+              </div>
+              <div class="msg ai-msg">
+                <div class="msg-avatar">AI</div>
+                <div class="msg-content">
+                  <div class="msg-bubble ai-bubble">
+                    A rocket accelerates by expelling gas downward (action). The gas exerts an equal and opposite force
+                    upward on the rocket (reaction). This thrust propels the rocket forward — a direct application of
+                    Newton's Third Law in propulsion systems.
+                    <div class="msg-citation">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      </svg>
+                      Mechanics_ch1.pdf – Page 34
+                    </div>
+                    <div class="msg-confidence high">
+                      <div class="confidence-dot"></div>Confidence: High
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chemistry messages (hidden by default) -->
+            <div class="chat-message-group chemistry-msgs" style="display:none">
+              <div class="msg user-msg">
+                <div class="msg-bubble">What is Newton's Third Law?</div>
+              </div>
+              <div class="msg ai-msg">
+                <div class="msg-avatar">AI</div>
+                <div class="msg-content">
+                  <div class="msg-bubble ai-bubble not-found">
+                    <div class="not-found-icon">⚠️</div>
+                    <strong>Not found in your Chemistry notes.</strong>
+                    <p>This topic doesn't appear in any of your uploaded Chemistry documents. Try switching to the
+                      Physics subject, or upload relevant chemistry notes first.</p>
+                    <div class="msg-confidence medium">
+                      <div class="confidence-dot"></div>Out of Scope
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="msg user-msg">
+                <div class="msg-bubble">What is the molar mass of water?</div>
+              </div>
+              <div class="msg ai-msg">
+                <div class="msg-avatar">AI</div>
+                <div class="msg-content">
+                  <div class="msg-bubble ai-bubble">
+                    The molar mass of water (H₂O) is approximately 18.015 g/mol. This is calculated as 2×(1.008) for
+                    hydrogen + 15.999 for oxygen = 18.015 g/mol.
+                    <div class="msg-citation">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      </svg>
+                      Chem_notes.pdf – Page 5
+                    </div>
+                    <div class="msg-confidence high">
+                      <div class="confidence-dot"></div>Confidence: High
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Math messages (hidden by default) -->
+            <div class="chat-message-group math-msgs" style="display:none">
+              <div class="msg user-msg">
+                <div class="msg-bubble">What is the quadratic formula?</div>
+              </div>
+              <div class="msg ai-msg">
+                <div class="msg-avatar">AI</div>
+                <div class="msg-content">
+                  <div class="msg-bubble ai-bubble">
+                    The quadratic formula solves ax² + bx + c = 0. The solution is:
+                    <br /><code>x = (-b ± √(b²-4ac)) / 2a</code><br />The discriminant (b²-4ac) determines the nature of
+                    roots: positive gives 2 real roots, zero gives 1 repeated root, negative gives complex roots.
+                    <div class="msg-citation">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      </svg>
+                      Math_notes.pdf – Page 7
+                    </div>
+                    <div class="msg-confidence high">
+                      <div class="confidence-dot"></div>Confidence: High
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-input-bar">
+            <input type="text" placeholder="Ask a question from your notes..." id="demoInput" />
+            <button class="chat-send-btn" onclick="openDemo()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 4: STUDY MODE
+  ══════════════════════════════════════════════════════ -->
+  <section id="study-mode" class="section section-study">
+    <div class="container">
+      <div class="section-tag reveal">Study Mode</div>
+      <h2 class="section-title reveal">Turn Notes into <span class="gradient-text">Exam Practice</span></h2>
+      <p class="section-sub reveal">AI-generated MCQs and short-answer questions from your own notes</p>
+
+      <div class="study-layout reveal-card">
+        <div class="mcq-panel">
+          <div class="panel-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9 12l2 2 4-4" />
+            </svg>
+            Multiple Choice Questions
+          </div>
+
+          <div class="mcq-item">
+            <div class="mcq-question">Q1. Newton's Third Law is best described as:</div>
+            <div class="mcq-options">
+              <label class="mcq-option correct-answer" onclick="selectAnswer(this)">
+                <span class="option-letter">A</span>
+                <span>Every action has an equal and opposite reaction</span>
+                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </label>
+              <label class="mcq-option" onclick="selectAnswer(this)">
+                <span class="option-letter">B</span>
+                <span>Force equals mass times acceleration</span>
+              </label>
+              <label class="mcq-option" onclick="selectAnswer(this)">
+                <span class="option-letter">C</span>
+                <span>An object in motion stays in motion</span>
+              </label>
+              <label class="mcq-option" onclick="selectAnswer(this)">
+                <span class="option-letter">D</span>
+                <span>Energy is always conserved</span>
+              </label>
+            </div>
+            <div class="explanation-toggle" onclick="toggleExplanation(this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <circle cx="12" cy="16" r="1" fill="currentColor" />
+              </svg>
+              Show Explanation
+            </div>
+            <div class="explanation hidden">
+              As per your notes, Newton's Third Law states that forces always come in pairs. Option A correctly captures
+              this mutual interaction.
+              <div class="explanation-citation">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                </svg>
+                Physics_notes.pdf · Page 12
+              </div>
+            </div>
+          </div>
+
+          <div class="mcq-item">
+            <div class="mcq-question">Q2. The molar mass of H₂O is approximately:</div>
+            <div class="mcq-options">
+              <label class="mcq-option" onclick="selectAnswer(this)"><span class="option-letter">A</span><span>16
+                  g/mol</span></label>
+              <label class="mcq-option correct-answer" onclick="selectAnswer(this)"><span
+                  class="option-letter">B</span><span>18.015 g/mol</span><svg class="check-icon" width="16" height="16"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg></label>
+              <label class="mcq-option" onclick="selectAnswer(this)"><span class="option-letter">C</span><span>20
+                  g/mol</span></label>
+              <label class="mcq-option" onclick="selectAnswer(this)"><span class="option-letter">D</span><span>14
+                  g/mol</span></label>
+            </div>
+          </div>
+
+          <div class="mcq-more">+3 more questions generated from your notes</div>
+        </div>
+
+        <div class="short-answer-panel">
+          <div class="panel-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            Short Answer Questions
+          </div>
+          <div class="sa-item">
+            <div class="sa-q">1. Explain why rockets work in space even without air to push against.</div>
+            <div class="sa-hint">Hint: Reference Newton's Third Law from your Physics notes.</div>
+          </div>
+          <div class="sa-item">
+            <div class="sa-q">2. Calculate the number of moles in 36 g of water.</div>
+            <div class="sa-hint">Hint: Use the molar mass from Chem_notes.pdf</div>
+          </div>
+          <div class="sa-item">
+            <div class="sa-q">3. Solve: 2x² + 5x – 3 = 0 using the quadratic formula.</div>
+            <div class="sa-hint">Hint: Formula covered in Math_notes.pdf · Page 7</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 5: WHY DIFFERENT
+  ══════════════════════════════════════════════════════ -->
+  <section id="why-different" class="section section-why">
+    <div class="container">
+      <div class="section-tag reveal">Why AskMyNotes</div>
+      <h2 class="section-title reveal">Built Different.<br /><span class="gradient-text">By Design.</span></h2>
+
+      <div class="why-grid">
+        <div class="why-card glass-card reveal-card">
+          <div class="why-icon">🚫</div>
+          <h3>Strict No-Hallucination</h3>
+          <p>Only answers questions if content exists in your uploaded notes. If the answer isn't there, it says so
+            honestly.</p>
+        </div>
+        <div class="why-card glass-card reveal-card" style="--delay: 0.08s">
+          <div class="why-icon">📊</div>
+          <h3>Confidence Indicator</h3>
+          <p>Every response comes with a High / Medium / Low confidence score based on relevance and coverage in your
+            notes.</p>
+        </div>
+        <div class="why-card glass-card reveal-card" style="--delay: 0.16s">
+          <div class="why-icon">🔗</div>
+          <h3>Evidence Snippets</h3>
+          <p>The exact text segments used to generate the answer are highlighted and displayed below every response.</p>
+        </div>
+        <div class="why-card glass-card reveal-card" style="--delay: 0.24s">
+          <div class="why-icon">🔒</div>
+          <h3>Subject Isolation Engine</h3>
+          <p>Each subject has its own vector embeddings namespace. Physics never bleeds into Chemistry. Complete
+            knowledge isolation.</p>
+        </div>
+        <div class="why-card glass-card reveal-card" style="--delay: 0.32s">
+          <div class="why-icon">📝</div>
+          <h3>Exam-Oriented Mode</h3>
+          <p>Generates MCQs and short-answer questions from your actual notes — not generic internet content. Real exam
+            simulation.</p>
+        </div>
+        <div class="why-card glass-card reveal-card" style="--delay: 0.4s">
+          <div class="why-icon">⚡</div>
+          <h3>Lightning Fast RAG</h3>
+          <p>Retrieval-Augmented Generation with vector similarity search returns the most relevant context in
+            milliseconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 6: TECH ARCHITECTURE
+  ══════════════════════════════════════════════════════ -->
+  <section id="tech-arch" class="section section-tech">
+    <div class="container">
+      <div class="section-tag reveal">Under the Hood</div>
+      <h2 class="section-title reveal">The Tech <span class="gradient-text">Architecture</span></h2>
+      <p class="section-sub reveal">A modern RAG pipeline built for accuracy and speed</p>
+
+      <div class="arch-pipeline">
+        <div class="arch-block reveal-block">
+          <div class="arch-icon">📄</div>
+          <div class="arch-label">Upload</div>
+          <div class="arch-sub">PDF / TXT / DOCX</div>
+        </div>
+        <div class="arch-arrow reveal-block" style="--delay: 0.08s">→</div>
+        <div class="arch-block reveal-block" style="--delay: 0.16s">
+          <div class="arch-icon">✂️</div>
+          <div class="arch-label">Chunking</div>
+          <div class="arch-sub">Semantic splitting</div>
+        </div>
+        <div class="arch-arrow reveal-block" style="--delay: 0.24s">→</div>
+        <div class="arch-block reveal-block" style="--delay: 0.32s">
+          <div class="arch-icon">🧮</div>
+          <div class="arch-label">Embeddings</div>
+          <div class="arch-sub">OpenAI / Cohere</div>
+        </div>
+        <div class="arch-arrow reveal-block" style="--delay: 0.40s">→</div>
+        <div class="arch-block reveal-block" style="--delay: 0.48s">
+          <div class="arch-icon">🗄️</div>
+          <div class="arch-label">Vector DB</div>
+          <div class="arch-sub">Pinecone / Chroma</div>
+        </div>
+        <div class="arch-arrow reveal-block" style="--delay: 0.56s">→</div>
+        <div class="arch-block reveal-block" style="--delay: 0.64s">
+          <div class="arch-icon">🤖</div>
+          <div class="arch-label">LLM</div>
+          <div class="arch-sub">GPT-4 / Claude</div>
+        </div>
+        <div class="arch-arrow reveal-block" style="--delay: 0.72s">→</div>
+        <div class="arch-block reveal-block highlight-block" style="--delay: 0.80s">
+          <div class="arch-icon">✅</div>
+          <div class="arch-label">Grounded Response</div>
+          <div class="arch-sub">Cited + Confident</div>
+        </div>
+      </div>
+
+      <div class="tech-stack-row reveal-card">
+        <div class="tech-chip">⚛️ React</div>
+        <div class="tech-chip">🐍 Python / FastAPI</div>
+        <div class="tech-chip">🧠 LangChain</div>
+        <div class="tech-chip">📌 Pinecone</div>
+        <div class="tech-chip">🤖 GPT-4o</div>
+        <div class="tech-chip">📦 PostgreSQL</div>
+        <div class="tech-chip">☁️ Vercel + Railway</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 7: ROADMAP
+  ══════════════════════════════════════════════════════ -->
+  <section id="roadmap" class="section section-roadmap">
+    <div class="container">
+      <div class="section-tag reveal">What's Next</div>
+      <h2 class="section-title reveal">Future <span class="gradient-text">Roadmap</span></h2>
+
+      <div class="timeline">
+        <div class="timeline-item reveal-left active-phase">
+          <div class="timeline-dot active-dot"></div>
+          <div class="timeline-content glass-card">
+            <div class="phase-tag current">Current · Phase 1</div>
+            <h3>MVP – Core RAG Engine</h3>
+            <p>Subject-scoped Q&A with PDF upload, vector embeddings, citation engine, confidence scoring, and MCQ
+              generation.</p>
+            <div class="phase-features">
+              <span>✅ Subject scoping</span>
+              <span>✅ PDF upload</span>
+              <span>✅ Cited answers</span>
+              <span>✅ MCQ mode</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-right">
+          <div class="timeline-dot upcoming-dot"></div>
+          <div class="timeline-content glass-card">
+            <div class="phase-tag upcoming">Q2 2025 · Phase 2</div>
+            <h3>Teacher Dashboard</h3>
+            <p>Educators can create class-wide subject spaces, assign notes to students, track Q&A patterns, and monitor
+              comprehension gaps.</p>
+            <div class="phase-features">
+              <span>🔜 Class management</span>
+              <span>🔜 Analytics</span>
+              <span>🔜 Shared notes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-left">
+          <div class="timeline-dot upcoming-dot"></div>
+          <div class="timeline-content glass-card">
+            <div class="phase-tag future">Q3 2025 · Phase 3</div>
+            <h3>Mobile App</h3>
+            <p>Native iOS & Android apps with offline note access, voice Q&A, and smart push notifications for revision
+              reminders.</p>
+            <div class="phase-features">
+              <span>🔜 iOS & Android</span>
+              <span>🔜 Voice Q&A</span>
+              <span>🔜 Offline mode</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-right">
+          <div class="timeline-dot future-dot"></div>
+          <div class="timeline-content glass-card">
+            <div class="phase-tag future2">Q4 2025 · Phase 4</div>
+            <h3>AI Revision Planner</h3>
+            <p>Personalized study schedules using spaced repetition, weakness detection from Q&A history, and adaptive
+              exam simulation.</p>
+            <div class="phase-features">
+              <span>🔜 Spaced repetition</span>
+              <span>🔜 Study planner</span>
+              <span>🔜 Adaptive tests</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-glow"></div>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo footer-logo">
+          <div class="logo-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="url(#footerLogoGrad)" />
+              <path d="M7 9h14M7 14h10M7 19h12" stroke="white" stroke-width="2" stroke-linecap="round" />
+              <circle cx="21" cy="19" r="3" fill="#FBBF24" />
+              <defs>
+                <linearGradient id="footerLogoGrad" x1="0" y1="0" x2="28" y2="28">
+                  <stop offset="0%" stop-color="#7C3AED" />
+                  <stop offset="100%" stop-color="#F472B6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="logo-text">AskMyNotes</span>
+        </div>
+        <p>Built for students who want answers, not assumptions.</p>
+        <div class="footer-hackathon">
+          🏆 Built at <strong>Vedam Journey Hackathon 2025</strong>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#solution">How It Works</a>
+          <a href="#chat-preview">Live Preview</a>
+          <a href="#study-mode">Study Mode</a>
+          <a href="#why-different">Why Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+        <div class="footer-col">
+          <h4>Developers</h4>
+          <a href="https://github.com" target="_blank">GitHub →</a>
+          <a href="#">API Docs</a>
+          <a href="#">Tech Stack</a>
+          <a href="#">Roadmap</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AskMyNotes · Made with ❤️ by Team Vedam Journey · <strong>Hackathon 2025</strong></p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════
+       FLOATING DEMO BUTTON
+  ══════════════════════════════════════════════════════ -->
+  <button class="demo-fab" onclick="openDemo()" aria-label="Try Demo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polygon points="5 3 19 12 5 21 5 3" />
+    </svg>
+    Try Demo
+  </button>
+
+  <!-- ═══════════════════════════════════════════════════
+       DEMO MODAL
+  ══════════════════════════════════════════════════════ -->
+  <div id="demoModal" class="modal-overlay" onclick="closeDemo(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeDemoBtn()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="modal-header">
+        <div class="modal-tag">🎮 Demo Mode</div>
+        <h3>Try AskMyNotes Live</h3>
+        <p>Pre-loaded with Physics notes. See exactly how citation works.</p>
+      </div>
+
+      <div class="modal-chat">
+        <div class="modal-subject-bar">
+          <span class="modal-subject active-subject">📘 Physics</span>
+          <span class="modal-file">Physics_notes.pdf · Mechanics_ch1.pdf</span>
+        </div>
+        <div class="modal-messages" id="modalMessages">
+          <div class="msg ai-msg">
+            <div class="msg-avatar">AI</div>
+            <div class="msg-content">
+              <div class="msg-bubble ai-bubble">
+                Hi! I'm your AskMyNotes AI. I have your Physics notes loaded. Ask me anything — I'll answer only from
+                your notes, with full citations. 📚
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-quick-qs">
+          <div class="quick-q-label">Try asking:</div>
+          <button class="quick-q" onclick="askDemo('What is Newton\'s Third Law?')">What is Newton's Third Law?</button>
+          <button class="quick-q" onclick="askDemo('Explain conservation of momentum.')">Explain conservation of
+            momentum</button>
+          <button class="quick-q" onclick="askDemo('What causes friction?')">What causes friction?</button>
+        </div>
+        <div class="modal-input-bar">
+          <input type="text" id="modalInput" placeholder="Ask a Physics question..."
+            onkeypress="handleModalEnter(event)" />
+          <button class="chat-send-btn" onclick="sendModalMessage()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
