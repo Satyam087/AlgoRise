@@ -4,6 +4,10 @@
 node_modules/
 .pnp
 .pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
 
 # ========================
 # Next.js Build Output
@@ -26,19 +30,27 @@ dist/
 # ========================
 # Vercel / Deployment
 # ========================
-.vercel
+.vercel/
 
 # ========================
-# Turbopack / Cache
+# Cache
 # ========================
 .turbo/
 .cache/
+.contentlayer/
+.eslintcache
+.prettiercache
+.stylelintcache
 
 # ========================
 # Testing
 # ========================
 coverage/
 .nyc_output/
+cypress/videos/
+cypress/screenshots/
+playwright-report/
+test-results/
 
 # ========================
 # Debug & Logs
@@ -47,12 +59,18 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+bun-error.log*
 *.log
 
 # ========================
 # OS Files
 # ========================
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 Desktop.ini
 
@@ -68,9 +86,24 @@ Desktop.ini
 *.njsproj
 *.sln
 *.sw?
+*.sublime-workspace
 
 # ========================
 # TypeScript
 # ========================
 *.tsbuildinfo
 next-env.d.ts
+
+# ========================
+# Certificates / Keys
+# ========================
+*.pem
+*.crt
+*.key
+
+# ========================
+# Miscellaneous Temporary Files
+# ========================
+tmp/
+temp/
+.temp/
