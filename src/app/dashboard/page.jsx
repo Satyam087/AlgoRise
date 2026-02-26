@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
+import { createClient } from '@/utils/supabase/client';
 import './dashboard.css';
 
 const SUBJECT_COLORS = ['#EF4444', '#3B82F6', '#10B981'];
@@ -14,12 +15,25 @@ export default function DashboardPage() {
     const [isCreating, setIsCreating] = useState(false);
     const [newName, setNewName] = useState('');
     const [showProfile, setShowProfile] = useState(false);
+    const [user, setUser] = useState(null);
+
+    const supabase = createClient();
 
     useEffect(() => {
         const saved = localStorage.getItem('askmynotes_subjects');
         if (saved) {
             try { setSubjects(JSON.parse(saved)); } catch { }
         }
+
+        const getUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) {
+                router.push('/auth');
+                return;
+            }
+            setUser(user);
+        };
+        getUser();
     }, []);
 
     const updateSubjects = (newSubs) => {
@@ -60,11 +74,12 @@ export default function DashboardPage() {
         <div className="dashboard-layout">
             <Sidebar
                 subjects={subjects}
+                user={user}
                 onProfileClick={() => setShowProfile(true)}
             />
 
             <div className="dash-main">
-                <Header canCreate={canCreate} onCreateClick={openCreateForm} />
+                <Header user={user} canCreate={canCreate} onCreateClick={openCreateForm} />
 
                 <div className="dash-content">
                     {/* Page Header */}
@@ -299,15 +314,17 @@ export default function DashboardPage() {
                             </div>
                         </div>
                         <div className="dash-profile-body">
-                            <div className="dash-profile-name">Ken Smith</div>
+                            <div className="dash-profile-name">
+                                {user?.user_metadata?.first_name} {user?.user_metadata?.last_name}
+                            </div>
                             <div className="dash-profile-headline">Engineering Student · AskMyNotes User</div>
                             <div className="dash-profile-info-grid">
-                                <div className="dash-profile-info-item"><label>Email</label><span>Smith@yandex.com</span></div>
+                                <div className="dash-profile-info-item"><label>Email</label><span>{user?.email}</span></div>
                                 <div className="dash-profile-info-item"><label>University</label><span>MIT</span></div>
                                 <div className="dash-profile-info-item"><label>Subjects</label><span>{subjects.length} active</span></div>
                                 <div className="dash-profile-info-item"><label>Notes Uploaded</label><span>12 files</span></div>
                                 <div className="dash-profile-info-item"><label>Questions Asked</label><span>156</span></div>
-                                <div className="dash-profile-info-item"><label>Joined</label><span>Jan 2025</span></div>
+                                <div className="dash-profile-info-item"><label>Joined</label><span>{user?.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jan 2025'}</span></div>
                             </div>
                         </div>
                     </div>

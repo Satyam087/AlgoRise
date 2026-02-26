@@ -2,8 +2,13 @@
 
 import { useState, useEffect } from 'react';
 
-export default function Header({ canCreate, onCreateClick }) {
+export default function Header({ user, canCreate, onCreateClick }) {
     const [isDark, setIsDark] = useState(true);
+
+    const firstName = user?.user_metadata?.first_name || '';
+    const lastName = user?.user_metadata?.last_name || '';
+    const fullName = firstName || lastName ? `${firstName} ${lastName}`.trim() : 'User';
+    const initials = (firstName.charAt(0) + lastName.charAt(0)) || user?.email?.charAt(0).toUpperCase() || 'U';
 
     useEffect(() => {
         const saved = localStorage.getItem('theme');
@@ -28,10 +33,10 @@ export default function Header({ canCreate, onCreateClick }) {
     return (
         <header className="dash-header">
             <div className="dash-header-user">
-                <div className="dash-header-avatar">KS</div>
+                <div className="dash-header-avatar">{initials}</div>
                 <div>
-                    <div className="dash-header-name">Ken Smith</div>
-                    <div className="dash-header-email">Smith@yandex.com</div>
+                    <div className="dash-header-name">{fullName}</div>
+                    <div className="dash-header-email">{user?.email}</div>
                 </div>
             </div>
 
